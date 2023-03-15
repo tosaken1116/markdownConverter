@@ -12,8 +12,6 @@ export default {
     argTypes: {},
 } as ComponentMeta<typeof EditorButtons>;
 
-const Template: ComponentStory<typeof EditorButtons> = (args) => (
-    <EditorButtons {...args} />
-);
+const Template: ComponentStory<typeof EditorButtons> = () => <EditorButtons />;
 export const Default = Template.bind({});
 Default.args = {};

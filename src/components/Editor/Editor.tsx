@@ -4,19 +4,16 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import { useRecoilState } from "recoil";
 import remarkgfm from "remark-gfm";
-import { useConvertString } from "./hooks";
-
 export const Editor = () => {
     const [props, setRawText] = useRecoilState(rawTextAtom);
-    const { handleConvert } = useConvertString();
     const handleSelect = (event: React.SyntheticEvent) => {
-        // if (event.target instanceof HTMLInputElement) {
-        setRawText({
-            ...props,
-            startIndex: Number(event.target.selectionStart),
-            endIndex: Number(event.target.selectionEnd),
-        });
-        // }
+        if (event.target instanceof HTMLTextAreaElement) {
+            setRawText({
+                ...props,
+                startIndex: Number(event.target.selectionStart),
+                endIndex: Number(event.target.selectionEnd),
+            });
+        }
     };
     return (
         <Stack direction="row" spacing={2}>

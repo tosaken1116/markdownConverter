@@ -26,7 +26,6 @@ export const useConvertString = () => {
         if (props.startIndex === props.endIndex) {
             return;
         }
-        console.log(convertType);
         const [startChar, endChar] = convertTypes[convertType];
         setRawText({
             startIndex: 0,
