@@ -1,29 +1,39 @@
-import { Box, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { rawTextAtom } from "@/atom/atom";
+import { Box, Stack, TextField } from "@mui/material";
+import React from "react";
+import ReactMarkdown from "react-markdown";
+import { useRecoilState } from "recoil";
+import remarkgfm from "remark-gfm";
+import { useConvertString } from "./hooks";
 
 export const Editor = () => {
-    const [rawText, setRawText] = useState("");
-    const [selectedText, setSelectedText] = useState("");
+    const [props, setRawText] = useRecoilState(rawTextAtom);
+    const { handleConvert } = useConvertString();
     const handleSelect = (event: React.SyntheticEvent) => {
-        if (event.target instanceof HTMLInputElement) {
-            const selectedWord = event.target.value.substring(
-                Number(event.target.selectionStart),
-                Number(event.target.selectionEnd)
-            );
-            setSelectedText(selectedWord);
-        }
+        // if (event.target instanceof HTMLInputElement) {
+        setRawText({
+            ...props,
+            startIndex: Number(event.target.selectionStart),
+            endIndex: Number(event.target.selectionEnd),
+        });
+        // }
     };
     return (
-        <Box>
+        <Stack direction="row" spacing={2}>
             <TextField
                 multiline
                 onSelect={handleSelect}
-                value={rawText}
+                value={props.rawText}
+                sx={{ backgroundColor: "white" }}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setRawText(event.target.value);
+                    setRawText({ ...props, rawText: event.target.value });
                 }}
             />
-            <Typography>{selectedText}</Typography>
-        </Box>
+            <Box>
+                <ReactMarkdown remarkPlugins={[remarkgfm]}>
+                    {props.rawText}
+                </ReactMarkdown>
+            </Box>
+        </Stack>
     );
 };

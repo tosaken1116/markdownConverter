@@ -14,23 +14,24 @@ import {
     Stack,
 } from "@mui/material";
 import React, { useState } from "react";
+import { headerSizes, useConvertString } from "../Editor/hooks";
 import { HeaderSelectionProps } from "./type";
-const headerSizes = ["#1", "#2", "#3", "#4", "#5", "#6"];
 
 export const EditorButtons = () => {
+    const { handleConvert } = useConvertString();
     return (
         <Stack direction="row" spacing={3}>
             <ButtonGroup variant="contained">
-                <Button>
+                <Button onClick={() => handleConvert("bold")}>
                     <FormatBoldIcon />
                 </Button>
-                <Button>
+                <Button onClick={() => handleConvert("italic")}>
                     <FormatItalicIcon />
                 </Button>
-                <Button>
+                <Button onClick={() => handleConvert("code")}>
                     <CodeIcon />
                 </Button>
-                <Button>
+                <Button onClick={() => handleConvert("strikethrough")}>
                     <StrikethroughSIcon />
                 </Button>
             </ButtonGroup>
@@ -40,11 +41,19 @@ export const EditorButtons = () => {
 };
 
 const HeaderButtonGroup = () => {
-    const [headerSize, setHeaderSize] = useState(headerSizes[0]);
+    const { handleConvert } = useConvertString();
+
+    const [headerSize, setHeaderSize] =
+        useState<keyof typeof headerSizes>("h1");
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
     return (
         <ButtonGroup variant="contained">
-            <Button>{headerSize}</Button>
+            <Button
+                onClick={() => handleConvert(headerSize)}
+                sx={{ textTransform: "none" }}
+            >
+                {headerSize}
+            </Button>
             <Button
                 onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
                     setAnchorEl(event.currentTarget)
@@ -66,7 +75,7 @@ const HeaderSelection = ({
     setHeader,
 }: HeaderSelectionProps) => {
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setHeader(event.currentTarget.innerText);
+        setHeader(event.currentTarget.innerText as keyof typeof headerSizes);
         closePopOver();
     };
     return (
@@ -81,9 +90,12 @@ const HeaderSelection = ({
             <Paper>
                 <ClickAwayListener onClickAway={closePopOver}>
                     <MenuList>
-                        {headerSizes.map((headerSize, index) => (
+                        {Object.keys(headerSizes).map((headerSize, index) => (
                             <MenuItem key={index}>
-                                <Button onClick={handleClick}>
+                                <Button
+                                    onClick={handleClick}
+                                    sx={{ textTransform: "none" }}
+                                >
                                     {headerSize}
                                 </Button>
                             </MenuItem>
