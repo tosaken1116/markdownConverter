@@ -5,6 +5,7 @@ import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import StrikethroughSIcon from "@mui/icons-material/StrikethroughS";
+import SubtitlesIcon from "@mui/icons-material/Subtitles";
 import {
     Button,
     ButtonGroup,
@@ -42,6 +43,9 @@ export const EditorButtons = () => {
                 </Button>
                 <Button onClick={() => handleConvert("citing")}>
                     <DoubleArrowIcon />
+                </Button>
+                <Button onClick={() => handleConvert("block")}>
+                    <SubtitlesIcon />
                 </Button>
             </ButtonGroup>
             <HeaderButtonGroup />

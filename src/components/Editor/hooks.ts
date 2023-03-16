@@ -19,6 +19,7 @@ export const convertTypes = {
     pre: ["```", "```"],
     list: ["- ", ""],
     citing: [">", ""],
+    block: ["```\n", "\n```"],
 };
 
 export const useConvertString = () => {
