@@ -77,5 +77,6 @@ export const useConvertString = () => {
             setConvert(simpleConvert(convertType));
         }
     };
+
     return { handleConvert };
 };

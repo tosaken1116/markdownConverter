@@ -1,5 +1,7 @@
+import { rawTextAtom } from "@/atom/atom";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import CodeIcon from "@mui/icons-material/Code";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
@@ -7,17 +9,22 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import StrikethroughSIcon from "@mui/icons-material/StrikethroughS";
 import SubtitlesIcon from "@mui/icons-material/Subtitles";
 import {
+    Box,
     Button,
     ButtonGroup,
     ClickAwayListener,
     MenuItem,
     MenuList,
     Paper,
+    Popover,
     Popper,
     Stack,
+    Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useRecoilState } from "recoil";
 import { headerSizes, useConvertString } from "../Editor/hooks";
+import { useCopy } from "./hooks";
 import { HeaderSelectionProps } from "./type";
 
 export const EditorButtons = () => {
@@ -49,10 +56,10 @@ export const EditorButtons = () => {
                 </Button>
             </ButtonGroup>
             <HeaderButtonGroup />
+            <CopyButton />
         </Stack>
     );
 };
-
 const HeaderButtonGroup = () => {
     const { handleConvert } = useConvertString();
 
@@ -122,5 +129,30 @@ const HeaderSelection = ({
                 </ClickAwayListener>
             </Paper>
         </Popper>
+    );
+};
+export const CopyButton = () => {
+    const [{ rawText }] = useRecoilState(rawTextAtom);
+    const { copyToClipboard, open, setOpen } = useCopy();
+    return (
+        <Box>
+            <Button
+                startIcon={<ContentCopyIcon />}
+                onClick={() => copyToClipboard(rawText)}
+                variant="outlined"
+            >
+                copy
+            </Button>
+            <Popover
+                open={open}
+                onClose={() => setOpen(false)}
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                }}
+            >
+                <Typography sx={{ p: 2 }}>copy successfully!</Typography>
+            </Popover>
+        </Box>
     );
 };
