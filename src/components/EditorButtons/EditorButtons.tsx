@@ -21,8 +21,9 @@ import { HeaderSelectionProps } from "./type";
 
 export const EditorButtons = () => {
     const { handleConvert } = useConvertString();
+
     return (
-        <Stack direction="row" spacing={3}>
+        <Stack direction="row" spacing={3} sx={{ overflow: "auto" }}>
             <ButtonGroup variant="contained">
                 <Button onClick={() => handleConvert("bold")}>
                     <FormatBoldIcon />
