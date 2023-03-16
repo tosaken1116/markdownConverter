@@ -32,17 +32,17 @@ export const EditorButtons = () => {
                 <Button onClick={() => handleConvert("italic")}>
                     <FormatItalicIcon />
                 </Button>
-                <Button onClick={() => handleConvert("code")}>
-                    <CodeIcon />
-                </Button>
                 <Button onClick={() => handleConvert("strikethrough")}>
                     <StrikethroughSIcon />
+                </Button>
+                <Button onClick={() => handleConvert("citing")}>
+                    <DoubleArrowIcon />
                 </Button>
                 <Button onClick={() => handleConvert("list")}>
                     <FormatListBulletedIcon />
                 </Button>
-                <Button onClick={() => handleConvert("citing")}>
-                    <DoubleArrowIcon />
+                <Button onClick={() => handleConvert("code")}>
+                    <CodeIcon />
                 </Button>
                 <Button onClick={() => handleConvert("block")}>
                     <SubtitlesIcon />
