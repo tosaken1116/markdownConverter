@@ -10,8 +10,8 @@ export const Editor = () => {
         if (event.target instanceof HTMLTextAreaElement) {
             setRawText({
                 ...props,
-                startIndex: Number(event.target.selectionStart),
-                endIndex: Number(event.target.selectionEnd),
+                startIndex: event.target.selectionStart,
+                endIndex: event.target.selectionEnd,
             });
         }
     };
@@ -21,12 +21,13 @@ export const Editor = () => {
                 multiline
                 onSelect={handleSelect}
                 value={props.rawText}
+                onTouchStart={handleSelect}
                 sx={{ backgroundColor: "white" }}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     setRawText({ ...props, rawText: event.target.value });
                 }}
             />
-            <Box>
+            <Box onSelect={handleSelect} onTouchStart={handleSelect}>
                 <ReactMarkdown remarkPlugins={[remarkgfm]}>
                     {props.rawText}
                 </ReactMarkdown>
