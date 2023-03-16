@@ -27,6 +27,7 @@ export const MarkdownResult = () => {
                 maxHeight: "90vh",
             }}
             p={1}
+            pl={2}
         >
             <ReactMarkdown className="prose" remarkPlugins={[remarkGfm]}>
                 {props.rawText}
