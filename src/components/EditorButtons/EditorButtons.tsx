@@ -74,8 +74,13 @@ const HeaderSelection = ({
     closePopOver,
     setHeader,
 }: HeaderSelectionProps) => {
+    const { handleConvert } = useConvertString();
+
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setHeader(event.currentTarget.innerText as keyof typeof headerSizes);
+        handleConvert(
+            event.currentTarget.innerText as keyof typeof headerSizes
+        );
         closePopOver();
     };
     return (
