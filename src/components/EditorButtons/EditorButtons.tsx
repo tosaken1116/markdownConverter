@@ -3,6 +3,7 @@ import CodeIcon from "@mui/icons-material/Code";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import StrikethroughSIcon from "@mui/icons-material/StrikethroughS";
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import {
     Button,
     ButtonGroup,
@@ -33,6 +34,12 @@ export const EditorButtons = () => {
                 </Button>
                 <Button onClick={() => handleConvert("strikethrough")}>
                     <StrikethroughSIcon />
+                </Button>
+                {/* <Button onClick={() => handleConvert("list")}>
+                    <FormatListBulletedIcon />
+                </Button> */}
+                <Button onClick={() => handleConvert("citing")}>
+                    <DoubleArrowIcon />
                 </Button>
             </ButtonGroup>
             <HeaderButtonGroup />

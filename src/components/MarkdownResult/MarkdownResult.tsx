@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { useRecoilState } from "recoil";
-import remarkgfm from "remark-gfm";
+import remarkGfm from "remark-gfm";
 export const MarkdownResult = () => {
     const [props, setRawText] = useRecoilState(rawTextAtom);
     const handleSelect = (event: React.SyntheticEvent) => {
@@ -28,7 +28,7 @@ export const MarkdownResult = () => {
             }}
             p={1}
         >
-            <ReactMarkdown remarkPlugins={[remarkgfm]}>
+            <ReactMarkdown className="prose" remarkPlugins={[remarkGfm]}>
                 {props.rawText}
             </ReactMarkdown>
         </Box>
