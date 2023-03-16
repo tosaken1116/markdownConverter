@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { RecoilRoot } from "recoil";
 
 import { Editor } from "./Editor";
 
@@ -12,6 +13,10 @@ export default {
     argTypes: {},
 } as ComponentMeta<typeof Editor>;
 
-const Template: ComponentStory<typeof Editor> = () => <Editor />;
+const Template: ComponentStory<typeof Editor> = () => (
+    <RecoilRoot>
+        <Editor />
+    </RecoilRoot>
+);
 export const Default = Template.bind({});
 Default.args = {};

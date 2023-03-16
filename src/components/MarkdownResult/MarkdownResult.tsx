@@ -1,8 +1,10 @@
 import { rawTextAtom } from "@/atom/atom";
-import { TextareaAutosize } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
+import ReactMarkdown from "react-markdown";
 import { useRecoilState } from "recoil";
-export const Editor = () => {
+import remarkgfm from "remark-gfm";
+export const MarkdownResult = () => {
     const [props, setRawText] = useRecoilState(rawTextAtom);
     const handleSelect = (event: React.SyntheticEvent) => {
         if (event.target instanceof HTMLTextAreaElement) {
@@ -14,23 +16,21 @@ export const Editor = () => {
         }
     };
     return (
-        <TextareaAutosize
+        <Box
             onSelect={handleSelect}
-            value={props.rawText}
             onTouchStart={handleSelect}
-            style={{
-                width: "50%",
-                height: "100%",
-                minHeight: "90vh",
-                fontSize: "20px",
+            sx={{
                 border: "1px solid white",
+                width: "50%",
                 borderRadius: "5px",
                 overflow: "auto",
                 maxHeight: "90vh",
             }}
-            onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
-                setRawText({ ...props, rawText: event.target.value });
-            }}
-        />
+            p={1}
+        >
+            <ReactMarkdown remarkPlugins={[remarkgfm]}>
+                {props.rawText}
+            </ReactMarkdown>
+        </Box>
     );
 };

@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { RecoilRoot } from "recoil";
 
 import { EditorButtons } from "./EditorButtons";
 
@@ -12,6 +13,10 @@ export default {
     argTypes: {},
 } as ComponentMeta<typeof EditorButtons>;
 
-const Template: ComponentStory<typeof EditorButtons> = () => <EditorButtons />;
+const Template: ComponentStory<typeof EditorButtons> = () => (
+    <RecoilRoot>
+        <EditorButtons />
+    </RecoilRoot>
+);
 export const Default = Template.bind({});
 Default.args = {};
